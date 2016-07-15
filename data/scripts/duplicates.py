@@ -49,9 +49,6 @@ def fix_duplicates(f):
             pos = float(row[1])
             neg = float(row[2])
             count = 1
-    for row in data:
-        if row[0] == "cool":
-            print row
     corpus = open('../SentiWordNet_reformatted.csv', 'wb')
     wr = csv.writer(corpus, delimiter=',')
     wr.writerows(data)
