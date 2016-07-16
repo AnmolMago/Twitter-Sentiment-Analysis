@@ -11,7 +11,7 @@ def test():
     scores = [ [0,0] ]
     algos = [Baseline()]
     count = 0
-    with open('data/corpus.csv', 'rU') as corpus:
+    with open('data/testData.csv', 'rU') as corpus:
         rows = csv.reader(corpus)
         for row in rows:
             a = 0
@@ -23,7 +23,6 @@ def test():
                     scores[a][1] += 1
                 a += 1
             count += 1
-            print count
     print "Baseline score: " + str(scores[0][0]) + " correct and " + str(scores[0][1]) + " incorrect. Total percentage: %.2f" % (float(float(scores[0][0])/(scores[0][0] + scores[0][1]))*100) + "% correct!"
 
 if __name__ == '__main__':

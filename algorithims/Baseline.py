@@ -15,6 +15,8 @@ class Baseline:
             return name + ": [" + string + "]"
 
     def grade(self, text):
+        if "?" in text:
+            return 3
         words = [word.lower() for word in text.split(" ")]
         corpus = open("data/SentiWordNet_reformatted.csv")
         rows = csv.reader(corpus)
@@ -46,6 +48,8 @@ class Baseline:
             print "Text is Neutral."
 
     def test(self, text):
+        if "?" in text:
+            return 3
         words = [word.lower() for word in text.split(" ")]
         corpus = open("data/SentiWordNet_reformatted.csv")
         rows = csv.reader(corpus)
@@ -55,7 +59,7 @@ class Baseline:
             self.cache = {}
             for row in rows:
                 self.cache[row[0].lower()] = [float(row[1]), float(row[2])]
-                
+        
         score = [0,0]
         for word in words:
             grade = self.cache.get(word, [0,0])

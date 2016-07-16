@@ -14,11 +14,11 @@ def find_duplicates(f):
     count = 0
 
     for word in words:
-        if word[0].lower() in seen:
-            print(word[0])
+        if word[1].lower() in seen:
+            print(word[1])
             count += 1
         else:
-            seen.add(word[0].lower())
+            seen.add(word[1].lower())
     print count
 
 def truncate(f, n):
@@ -57,5 +57,5 @@ def fix_duplicates(f):
 
 
 if __name__ == '__main__':
-    with open('../SentiWordNet_reformatted.csv') as f:
-        fix_duplicates(f)
+    with open('data/raw/corpuses/activecorpus_raw.csv', 'rU') as f:
+        find_duplicates(f)
