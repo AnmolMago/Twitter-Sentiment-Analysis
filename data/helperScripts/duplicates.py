@@ -57,5 +57,5 @@ def fix_duplicates(f):
 
 
 if __name__ == '__main__':
-    with open('data/raw/corpuses/activecorpus_raw.csv', 'rU') as f:
+    with open('data/testData.csv', 'r') as f:
         find_duplicates(f)
