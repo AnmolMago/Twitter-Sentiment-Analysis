@@ -19,11 +19,11 @@ def toomanycells():
     print count
 
 def lookOverQuestions():
-    testD = csv.reader(open('data/testDataOld.csv', 'rU'))
+    testD = csv.reader(open('data/testData.csv', 'rU'))
     data = []
     count = 0
     for row in testD:
-        if row[0] == "3":# and not "?" in row[1]:
+        if row[0] == "3" and not "?" in row[1]:
             print row[1]
             count += 1
     #         cmd = raw_input("??: ")
