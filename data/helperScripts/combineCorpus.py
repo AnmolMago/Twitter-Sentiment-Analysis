@@ -4,6 +4,7 @@ posC = csv.reader(open('data/raw/corpuses/poscorpus_raw.csv', 'rU'))
 negC = csv.reader(open('data/raw/corpuses/negcorpus_raw.csv', 'rU'))
 qusC = csv.reader(open('data/raw/corpuses/quscorpus_raw.csv', 'rU'))
 actC = csv.reader(open('data/raw/corpuses/activecorpus_raw.csv', 'rU'))
+testO = csv.reader(open('data/testDataOld.csv', 'rU'))
 senC = csv.reader(open('data/testData/sentiment140/testdata.manual.2009.06.14.csv', 'rU'))
 
 data = {}
@@ -55,5 +56,12 @@ for row in senC:
         print "Weird thing found: " + row[0]
 print len(data)
 
-wr = csv.writer(open('data/testData.csv', 'wb'), delimiter=',')
+for row in testO:
+    if row[0] == "3":
+        if row[1].lower() in data:
+            data[row[1].lower()] = [3, row[1]]
+        else:
+            print row[1]
+
+wr = csv.writer(open('data/testData.csv', 'w'), delimiter=',')
 wr.writerows(data.values())
