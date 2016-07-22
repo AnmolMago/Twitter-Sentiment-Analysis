@@ -1,7 +1,16 @@
-import csv
-class Baseline:
+import csv, time
+class Baseline(object):
     
     cache = {}
+    
+    def __init__(self):
+        start_time = time.time()
+        corpus = open("data/SentiWordNet_reformatted.csv")
+        rows = csv.reader(corpus)
+        
+        for row in rows:
+            self.cache[row[0].lower()] = [float(row[1]), float(row[2])]
+        print "Baseline initialization time: " + str(time.time() - start_time)
 
     def formatThing(self, arr, name):
         if(len(arr) == 0):
@@ -16,7 +25,7 @@ class Baseline:
 
     def grade(self, text):
         if "?" in text:
-            return 3
+            print "Text is a question"
         words = [word.lower() for word in text.split(" ")]
         corpus = open("data/SentiWordNet_reformatted.csv")
         rows = csv.reader(corpus)
@@ -49,26 +58,16 @@ class Baseline:
 
     def test(self, text):
         if "?" in text:
-            return 3
+            return "question"
+        
         words = [word.lower() for word in text.split(" ")]
-        corpus = open("data/SentiWordNet_reformatted.csv")
-        rows = csv.reader(corpus)
-        
-        if len(self.cache) != 147305:
-            print "writing cache!"
-            self.cache = {}
-            for row in rows:
-                self.cache[row[0].lower()] = [float(row[1]), float(row[2])]
-        
         score = [0,0]
         for word in words:
             grade = self.cache.get(word, [0,0])
             score[0] += grade[0]
             score[1] += grade[1]
-            
+        
         if score[0] > score[1]:
-            return 0
-        elif score[0] < score[1]:
-            return 1
+            return "positive"
         else:
-            return 2
+            return "negative"
