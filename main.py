@@ -6,11 +6,11 @@ from data.helperScripts.sanitizeData import clean
 
 def main():
     text = raw_input("Enter text to grade: ")
-    print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~{Baseline}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    print Baseline.grade(text)
+    print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~{Baseline}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" 
+    print Baseline().grade(text)
     print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     print "~~~~~~~~~~~~~~~~~~~~~~~~~~~{Naive Bayes}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    print NLTK().grade(text)
+    print NaiveBayes().grade(text)
     print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 
 def test():
@@ -26,7 +26,6 @@ def test():
         for row in rows:
             for name, algo in algos.items():
                 if not name in scores:
-                    print "init"
                     scores[name] = [0.0,0.0]
                     percision[name] = {}
                     recall[name] = {}
@@ -68,4 +67,4 @@ def test():
         print "Testing time statistics for "+name+": {Total: " + str(testingTime[name]) + ", Average: " + str(testingTime[name]/count) + "}"
 
 if __name__ == '__main__':
-    test()
+    main()

@@ -31,7 +31,7 @@ class NaiveBayes(object):
                     if word.lower() not in self.Vocab:
                         self.Vocab[word.lower()] = 0.0
                     self.Vocab[word.lower()] += count
-        print "My Naive Bayes implementation's initialization and training time: " + str(time.time() - start_time)
+        # print "My Naive Bayes implementation's initialization and training time: " + str(time.time() - start_time)
 
 
     def getWordCounts(self, words):
@@ -106,27 +106,21 @@ class NaiveBayes(object):
             for cat, score in scores.items():
                 if score > 0:
                     TotalLogScores[cat] += math.log(count * score/p_word)
-            
 
-
-        Epsilon = 3
+        Epsilon = 0
 
         TotalScores = {}
         for cat, logScore in TotalLogScores.items():
             TotalScores[cat] = math.exp(logScore)
 
-        print text
-        print "{positive:"+str(TotalScores["positive"])+", negative:"+str(TotalScores["negative"])+", question:"+str(TotalScores["question"])+"}"
-
         if TotalScores["question"] > ( TotalScores["positive"] + Epsilon ) and TotalScores["question"] > ( TotalScores["negative"] + Epsilon ):
-            print "Text is a Question..."
-        elif TotalScores["positive"] > ( TotalScores["negative"] + Epsilon ) and TotalScores["positive"] > ( TotalScores["question"] + Epsilon ):
-            print "Text is positive"
+            return "Text is a Question..."
+        elif TotalScores["positive"] > ( TotalScores["negative"] + Epsilon ):# and TotalScores["positive"] > ( TotalScores["question"] + Epsilon ):
+            return "Text is positive"
         elif TotalScores["negative"] > ( TotalScores["positive"] + Epsilon ) and TotalScores["negative"] > ( TotalScores["question"] + Epsilon ):
-            "Text is negative"
+            return "Text is negative"
         else:
-            "Text is neutral"
-
+            return "Text is neutral"
 
 if __name__ == '__main__':
     n = NaiveBayes()

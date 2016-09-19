@@ -10,7 +10,7 @@ class Baseline(object):
         
         for row in rows:
             self.cache[row[0].lower()] = [float(row[1]), float(row[2])]
-        print "Baseline initialization time: " + str(time.time() - start_time)
+        # print "Baseline initialization time: " + str(time.time() - start_time)
 
     def formatThing(self, arr, name):
         if(len(arr) == 0):
@@ -44,17 +44,17 @@ class Baseline(object):
                 score[0] += float(row[1])
                 score[1] += float(row[2])
 
-        print formatThing(pos, "positive")
-        print formatThing(neg, "negative")
-        print formatThing(neu, "neutral")
+        print self.formatThing(pos, "positive")
+        print self.formatThing(neg, "negative")
+        print self.formatThing(neu, "neutral")
         print "Final Score: [" + str(score[0]) + " vs. " + str(score[1]) + "]"
             
         if score[0] > score[1]:
-            print "Text is Positive!"
+            return "Text is Positive!"
         elif score[0] < score[1]:
-            print "Text is Negative..."
+            return "Text is Negative..."
         else:
-            print "Text is Neutral."
+            return "Text is Neutral."
 
     def test(self, text):
         if "?" in text:
